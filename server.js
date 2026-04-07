@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 10000;
 const MONGO_URI = process.env.MONGO_URI || "mongodb://127.0.0.1:27017/dental_clinic";
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(__dirname));
 
 mongoose.connect(MONGO_URI)
   .then(() => console.log("MongoDB connected"))
@@ -50,7 +50,7 @@ app.delete("/api/patients/:id", async (req, res) => {
 });
 
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.sendFile(path.join(__dirname, "index.html"));
 });
 
 app.listen(PORT, () => {
